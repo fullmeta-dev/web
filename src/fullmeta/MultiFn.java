@@ -28,9 +28,11 @@
 // compiled when Clojure itself had been built, so their classes will
 // be on the classpath.
 //
-// javac -cp `clj -Spath` clj/src/fullmeta/*.java
+// javac -cp `clj -Spath` src/fullmeta/*.java
 //
-
+// or in this repo:
+//
+// clj -M:dev:java/compile
 
 package fullmeta;
 

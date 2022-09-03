@@ -7,7 +7,8 @@
    [clojure.pprint :as pprint]
    [clojure.test :as t]
    ;; for debug
-   [rum.server-render :refer [render-static-markup]])
+   ;; [rum.server-render :refer [render-static-markup]]
+   )
   (:import
    [clojure.lang PersistentVector Atom IPersistentVector ISeq IFn Named Numbers Ratio Keyword Symbol PersistentArrayMap]))
 
@@ -275,7 +276,7 @@
 ;; TODO categorize tags e.g. as per MDN to target groups of tags with methods and hierarchies?
 (def tags
   (->>
-   #{"html" "base" "head" "link" "meta" "style" "title" "body" "address" "article" "aside" "footer" "header" "h1" "h2" "h3" "h4" "h5" "h6" "hgroup" "main" "nav" "section" "blockquote" "dd" "div" "dl" "dt" "figcaption" "figure" "hr" "li" "ol" "p" "pre" "ul" "a" "abbr" "b" "bdi" "bdo" "br" "cite" "code" "data" "dfn" "em" "i" "kbd" "mark" "q" "rb" "rp" "rt" "rtc" "ruby" "s" "samp" "small" "span" "strong" "sub" "sup" "time" "u" "var" "wbr" "area" "audio" "img" "map" "track" "video" "embed" "iframe" "object" "param" "picture" "source" "canvas" "noscript" "script" "del" "ins" "caption" "col" "colgroup" "table" "tbody" "td" "tfoot" "th" "thead" "tr" "button" "datalist" "fieldset" "form" "input" "label" "legend" "meter" "optgroup" "option" "output" "progress" "select" "textarea" "details" "dialog" "menu" "summary" "slot" "template"}
+   #{"turbo-frame" "html" "base" "head" "link" "meta" "style" "title" "body" "address" "article" "aside" "footer" "header" "h1" "h2" "h3" "h4" "h5" "h6" "hgroup" "main" "nav" "section" "blockquote" "dd" "div" "dl" "dt" "figcaption" "figure" "hr" "li" "ol" "p" "pre" "ul" "a" "abbr" "b" "bdi" "bdo" "br" "cite" "code" "data" "dfn" "em" "i" "kbd" "mark" "q" "rb" "rp" "rt" "rtc" "ruby" "s" "samp" "small" "span" "strong" "sub" "sup" "time" "u" "var" "wbr" "area" "audio" "img" "map" "track" "video" "embed" "iframe" "object" "param" "picture" "source" "canvas" "noscript" "script" "del" "ins" "caption" "col" "colgroup" "table" "tbody" "td" "tfoot" "th" "thead" "tr" "button" "datalist" "fieldset" "form" "input" "label" "legend" "meter" "optgroup" "option" "output" "progress" "select" "textarea" "details" "dialog" "menu" "summary" "slot" "template"}
    (reduce #(assoc %1 (clojure.core/keyword %2) %2) {})))
 
 

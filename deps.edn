@@ -25,8 +25,7 @@
         ch.qos.logback/logback-classic {:mvn/version "1.2.3"
                                         :exclusions  [org.slf4j/slf4j-api]}}
 
- :paths [ ;; "resources"
-         "clj/src"]
+ :paths ["src"]
 
  :aliases
  {:dev {:extra-deps {org.clojure/tools.namespace  {:mvn/version "1.0.0"}
@@ -41,10 +40,7 @@
                      cider/piggieback             {:mvn/version "0.5.2"}
                      cider/cider-nrepl            {:mvn/version "0.25.2"}}
 
-        :extra-paths ["clj/dev"
-                      ;; "clj/classes"
-                      ;; "out"
-                      ]
+        :extra-paths ["dev"]
 
         ;; logging - ensure proper backend before clojure.tools.logging first loaded
         :jvm-opts ["-Dfullmeta.env=dev"
@@ -54,7 +50,7 @@
   :spec  {:extra-deps    {org.clojure/spec.alpha {:mvn/version "0.2.187"}}}
   :spec2 {:extra-deps    {org.clojure/alpha.spec {:local/root "../spec-alpha2"}}}
 
-  :prod {:extra-paths ["clj/prod"]
+  :prod {:extra-paths ["prod"]
          :jvm-opts    ["-Dfullmeta.env=prod"
                        "-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory"]}
 
@@ -71,7 +67,7 @@
   :make {:main-opts ["-m" "make"]}}
 
  ;; our custom keys clojure.tools.deps.alpha knows nothing about
- :custom {:compile-path   "clj/classes"
-          :do-not-refresh ["clj/classes"
-                           ;; "clj/dev"
+ :custom {:compile-path   "classes"
+          :do-not-refresh ["classes"
+                           ;; "dev"
                            "resources"]}}
