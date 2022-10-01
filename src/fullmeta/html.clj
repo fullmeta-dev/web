@@ -272,13 +272,18 @@
 
 ;;* Hierarchies ------------------------------------------------------- *;;
 
+;; TODO must be duplicated in CSS atm, need to factor out somehow!
+(def svg #{"svg" "a" "animate" "animateMotion" "animateTransform" "audio" "canvas" "circle" "clipPath" "defs" "desc" "discard" "ellipse" "feBlend" "feColorMatrix" "feComponentTransfer" "feComposite" "feConvolveMatrix" "feDiffuseLighting" "feDisplacementMap" "feDistantLight" "feDropShadow" "feFlood" "feFuncA" "feFuncB" "feFuncG" "feFuncR" "feGaussianBlur" "feImage" "feMerge" "feMergeNode" "feMorphology" "feOffset" "fePointLight" "feSpecularLighting" "feSpotLight" "feTile" "feTurbulence" "filter" "foreignObject" "g" "iframe" "image" "line" "linearGradient" "marker" "mask" "metadata" "mpath" "path" "pattern" "polygon" "polyline" "radialGradient" "rect" "script" "set" "stop" "style" "switch" "symbol" "text" "textPath" "title" "tspan" "unknown" "use" "video" "view"})
+
+(def turbo #{"turbo-frame"})
 
 ;; TODO categorize tags e.g. as per MDN to target groups of tags with methods and hierarchies?
 (def tags
   (->>
-   #{"turbo-frame" "html" "base" "head" "link" "meta" "style" "title" "body" "address" "article" "aside" "footer" "header" "h1" "h2" "h3" "h4" "h5" "h6" "hgroup" "main" "nav" "section" "blockquote" "dd" "div" "dl" "dt" "figcaption" "figure" "hr" "li" "ol" "p" "pre" "ul" "a" "abbr" "b" "bdi" "bdo" "br" "cite" "code" "data" "dfn" "em" "i" "kbd" "mark" "q" "rb" "rp" "rt" "rtc" "ruby" "s" "samp" "small" "span" "strong" "sub" "sup" "time" "u" "var" "wbr" "area" "audio" "img" "map" "track" "video" "embed" "iframe" "object" "param" "picture" "source" "canvas" "noscript" "script" "del" "ins" "caption" "col" "colgroup" "table" "tbody" "td" "tfoot" "th" "thead" "tr" "button" "datalist" "fieldset" "form" "input" "label" "legend" "meter" "optgroup" "option" "output" "progress" "select" "textarea" "details" "dialog" "menu" "summary" "slot" "template"}
+   #{"html" "base" "head" "link" "meta" "style" "title" "body" "address" "article" "aside" "footer" "header" "h1" "h2" "h3" "h4" "h5" "h6" "hgroup" "main" "nav" "section" "blockquote" "dd" "div" "dl" "dt" "figcaption" "figure" "hr" "li" "ol" "p" "pre" "ul" "a" "abbr" "b" "bdi" "bdo" "br" "cite" "code" "data" "dfn" "em" "i" "kbd" "mark" "q" "rb" "rp" "rt" "rtc" "ruby" "s" "samp" "small" "span" "strong" "sub" "sup" "time" "u" "var" "wbr" "area" "audio" "img" "map" "track" "video" "embed" "iframe" "object" "param" "picture" "source" "canvas" "noscript" "script" "del" "ins" "caption" "col" "colgroup" "table" "tbody" "td" "tfoot" "th" "thead" "tr" "button" "datalist" "fieldset" "form" "input" "label" "legend" "meter" "optgroup" "option" "output" "progress" "select" "textarea" "details" "dialog" "menu" "summary" "slot" "template" "svg"}
+   (into svg)
+   (into turbo)
    (reduce #(assoc %1 (clojure.core/keyword %2) %2) {})))
-
 
 (defn tag?
   ([tag #_in category] (throw "implement me"))
