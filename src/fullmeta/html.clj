@@ -339,12 +339,16 @@
   :default ::tag
   :hierarchy tag-hierarchy)
 
+(defn vectorise [o]
+  (if (string? o) [o] o))
 
 (defmethod keyword ::tag [tag _id {:keys [selector attrs children]}]
   (let [selector (or selector (css/parse tag))
         {:keys [tag id class]} (get selector :split)
         id (or (:string id) (:id attrs))
         classes (->> (get attrs :class)
+                     ;; allow string {:class "foo bar baz"}
+                     (vectorise)
                      (map #(make css/selector % :class))
                      ;; => extract attrs classes and concat them to the end so they have highest priority
                      (concat [(make css/selector selector :tag)
