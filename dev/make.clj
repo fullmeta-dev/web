@@ -161,15 +161,15 @@
 ;; being started, we better wrap it in try, report but still
 ;; start the repl, so the error maybe fixed.
 (defmethod make :cljs/build [& args]
-  (println "building clj/src")
-  (build/build "clj/src" cljs-build-opts))
+  (println "building src")
+  (build/build "src" cljs-build-opts))
 #_(make :cljs/build)
 
 
 (defmethod make :cljs/watch [& args]
   (let [cljs-watch-opts {:watch-fn (fn [] (println "CLJS re-build success!!!"))
                          :watch-error-fn (fn [] (println "CLJS re-build fail!!!"))}]
-    (build/watch "clj/src" (merge
+    (build/watch "src" (merge
                             cljs-build-opts
                             cljs-watch-opts))))
 
@@ -189,7 +189,7 @@
              ;; :launch-browser true
              :port 9000
              ;; :working-dir "resources/public/js"
-             :src "clj/src"
+             :src "src"
              ;; :static-dir ["resources/public/js"
              ;;              "resources/public"
              ;;              "resources/public/assets"]
@@ -215,8 +215,8 @@
 
 
 (defmethod make :java/compile [task & args]
-  (println (apply str "compiling .java files in " (or (seq args) ["clj/src"])))
-  (doseq [dir (or (seq args) ["clj/src"])]
+  (println (apply str "compiling .java files in " (or (seq args) ["src"])))
+  (doseq [dir (or (seq args) ["src"])]
     (dev.prelude/javac dir)))
 
 #_
