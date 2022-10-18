@@ -7,7 +7,30 @@
 
 ;;* Logback
 
+;; Current at the time of writing 18 Oct 2022
+;;
+;; ch.qos.logback/logback-classic    {:mvn/version "1.3.4"}
+;; ch.qos.logback/logback-core       {:mvn/version "1.3.4"}
+;; org.slf4j/slf4j-api               {:mvn/version "2.0.3"}
+;; org.slf4j/jul-to-slf4j            {:mvn/version "2.0.3"}
+;; org.slf4j/jcl-over-slf4j          {:mvn/version "2.0.3"}
+;; org.slf4j/log4j-over-slf4j        {:mvn/version "2.0.3"}
+
 (def logback-dev-config
+  [:configuration {:scanPeriod "5 seconds" :scan "true"}
+   [:appender {:class "ch.qos.logback.core.ConsoleAppender" :name "STDOUT"}
+    [:encoder [:pattern "%date [%thread] %-5level %logger{36} - %msg%n"]]]
+   [:root {:level "info"}
+    [:appender-ref {:ref "STDOUT"}]]])
+
+(def logback-prod-config
+  [:configuration
+   [:appender {:class "ch.qos.logback.core.ConsoleAppender" :name "STDOUT"}
+    [:encoder [:pattern "%date [%thread] %-5level %logger{36} - %msg%n"]]]
+   [:root {:level "info"}
+    [:appender-ref {:ref "STDOUT"}]]])
+
+(def logback-dev-config-example
   [:configuration {:scanPeriod "5 seconds" :scan "true"}
 
    [:appender {:class "ch.qos.logback.core.ConsoleAppender" :name "STDOUT"}
@@ -52,13 +75,6 @@
 
    [:contextListener {:class "ch.qos.logback.classic.jul.LevelChangePropagator"}
     [:resetJUL "true"]]])
-
-(def logback-prod-config
-  [:configuration
-   [:appender {:class "ch.qos.logback.core.ConsoleAppender" :name "STDOUT"}
-    [:encoder [:pattern "%date [%thread] %-5level %logger{36} - %msg%n"]]]
-   [:root {:level "info"}
-    [:appender-ref {:ref "STDOUT"}]]])
 
 ;;* Log4j2
 
@@ -219,13 +235,13 @@
 
   ;; logback
   (read-xml-config "logback.xml")
-  (write-xml-config "env/dev/resources/logback.xml" logback-dev-config)
-  (write-xml-config "env/prod/resources/logback.xml" logback-prod-config)
+  (write-xml-config "dev/logback.xml" logback-dev-config)
+  (write-xml-config "prod/logback.xml" logback-prod-config)
 
   ;; log4j2
   (read-xml-config "log4j2.xml")
-  (write-xml-config "env/dev/resources/log4j2.xml" log4j2-dev-config)
-  (write-xml-config "env/prod/resources/log4j2.xml" log4j2-prod-config)
+  (write-xml-config "dev/log4j2.xml" log4j2-dev-config)
+  (write-xml-config "prod/log4j2.xml" log4j2-prod-config)
 
   ;; comment
   )
