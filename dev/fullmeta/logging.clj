@@ -19,14 +19,24 @@
 (def logback-dev-config
   [:configuration {:scanPeriod "5 seconds" :scan "true"}
    [:appender {:class "ch.qos.logback.core.ConsoleAppender" :name "STDOUT"}
-    [:encoder [:pattern "%date [%thread] %-5level %logger{36} - %msg%n"]]]
-   [:root {:level "info"}
+    [:filter {:class "ch.qos.logback.classic.filter.ThresholdFilter"}
+     [:level "DEBUG"]]
+    [:encoder
+     [:pattern "%date %highlight(%-5level) %logger{36}: %msg%n"]
+     [:charset "UTF-8"]]]
+
+   [:root {:level "ALL"}]
+
+   [:logger {:name "fullmeta"}
+    [:appender-ref {:ref "STDOUT"}]]
+
+   [:logger {:name "www.fullmeta"}
     [:appender-ref {:ref "STDOUT"}]]])
 
 (def logback-prod-config
   [:configuration
    [:appender {:class "ch.qos.logback.core.ConsoleAppender" :name "STDOUT"}
-    [:encoder [:pattern "%date [%thread] %-5level %logger{36} - %msg%n"]]]
+    [:encoder [:pattern "%date %-5level %logger{36} - %msg%n"]]]
    [:root {:level "info"}
     [:appender-ref {:ref "STDOUT"}]]])
 
