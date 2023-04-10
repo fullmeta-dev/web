@@ -3,6 +3,7 @@
   (:require [fullmeta.prelude             :as prelude :refer [make expect]]
             [clojure.tools.namespace.file :as ns.file]
             [clojure.tools.namespace.find :as ns.find]
+            [clojure.tools.logging :as log]
             [clojure.string               :as string]
             [clojure.pprint               :as pp]
             [clojure.java.io              :as io]
@@ -355,7 +356,10 @@
 (defmulti assert-failed
   (fn [assertion]
     (or (-> assertion :key)
-        (-> assertion :form first))))
+        (let [form (-> assertion :form)]
+          (cond
+            (symbol? form) form
+            (seq? form) (first form))))))
 
 (def ^:dynamic *assert-failed-default*
   (fn assert-failed-default [{:keys [form key] :as assertion}]
